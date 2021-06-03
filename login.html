@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Login</title>
+        <style>
+            .background-adv {
+                background-color: rgb(37, 37, 37);
+            }
+            .top-bar-adv {
+                background-color: rgb(172, 9, 9);
+                display: flex;
+                color: white;
+                flex: 1;
+                padding: 20px;
+                font-family: Verdana, Geneva, Tahoma, sans-serif;
+                font-size: 50px;
+                align-content: center;
+                justify-content: center;
+            }
+
+            .hr {
+                border-radius: 5px;
+                border-width: 1.5px;
+                outline-width: 0;
+                outline-style: none;
+                border-color: rgb(172, 9, 9);
+                background-color: rgb(172, 9, 9);
+            }
+            .btn1 {
+                background-color: rgb(172, 9, 9);
+                outline-width: 0;
+                border-width: 0;
+                border-radius: 0;
+                width: 150px;
+                height: 50px;
+                font-size: 25px;
+                color: white;
+                font-family: Verdana, Geneva, Tahoma, sans-serif;
+            }
+            .btn1:hover {
+                animation-name: ani1;
+                animation-duration: 0.5s;
+                animation-fill-mode: forwards;
+            }
+            @keyframes ani1 {
+                100% {background-color: rgb(37, 37, 37);}
+            }
+            .login-container {
+                display: flex;
+                color: white;
+                flex: 1;
+                padding: 20px;
+                font-family: Verdana, Geneva, Tahoma, sans-serif;
+                font-size: 15px;
+                align-content: center;
+                justify-content: center;  
+            }
+            .inp1 {
+                background-color: rgb(255, 255, 255);
+                color: rgb(172, 9, 9);
+                font-family: Verdana, Geneva, Tahoma, sans-serif;
+                font-size: 16px;
+                outline-width: 0;
+                border-radius: 0;
+                border-width: 0;
+            }
+            .label1 {
+                display: flex;
+                color: white;
+                flex: 1;
+                font-family: Verdana, Geneva, Tahoma, sans-serif;
+                font-size: 15px;
+                align-content: center;
+                justify-content: center;  
+            }
+        </style>
+        <script>
+            function login() {
+                var xml = new XMLHttpRequest();
+                xml.open("POST","/api/login");
+                var data = new FormData();
+                data.append("username", document.getElementById("username").value);
+                data.append("password", document.getElementById("password").value);
+                xml.send(data);
+                xml.onload = function () {
+                    window.location.reload();
+                }
+            }
+        </script>
+    </head>
+    <body class="background-adv">
+        <div class="top-bar-adv">
+            <h1>RedSide</h1>
+        </div>
+        <div class="login-container">
+            <input id="username" class="inp1" type="text" placeholder="Username">
+            <input id="password" class="inp1" type="password" placeholder="Password">
+            <button onclick="login()" class="btn1">Login</button>
+        </div>
+        <p class="label1">(Logging in to your account means you're agreeing to our Terms.)</p>
+    </body>
+</html>

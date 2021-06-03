@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Home</title>
+        <style>
+            .background-adv {
+                background-color: rgb(37, 37, 37);
+            }
+            .top-bar-adv {
+                background-color: rgb(172, 9, 9);
+                display: flex;
+                color: white;
+                flex: 1;
+                padding: 20px;
+                font-family: Verdana, Geneva, Tahoma, sans-serif;
+                font-size: 50px;
+                align-content: center;
+                justify-content: center;
+            }
+
+            .hr {
+                border-radius: 5px;
+                border-width: 1.5px;
+                outline-width: 0;
+                outline-style: none;
+                border-color: rgb(32, 32, 32);
+                background-color: rgb(32, 32, 32);
+            }
+            .btn1 {
+                background-color: rgb(172, 9, 9);
+                outline-width: 0;
+                border-width: 0;
+                border-radius: 0;
+                width: 150px;
+                height: 50px;
+                font-size: 25px;
+                color: white;
+                font-family: Verdana, Geneva, Tahoma, sans-serif;
+            }
+            .btn1:hover {
+                animation-name: ani1;
+                animation-duration: 0.5s;
+                animation-fill-mode: forwards;
+            }
+            @keyframes ani1 {
+                100% {background-color: rgb(32, 32, 32);}
+            }
+            .inp1 {
+                background-color: rgb(32, 32, 32);
+                color: rgb(255, 255, 255);
+                font-family: Verdana, Geneva, Tahoma, sans-serif;
+                font-size: 20px;
+                outline-width: 0;
+                border-radius: 0;
+                border-width: 0;
+            }
+            .label1 {
+                display: flex;
+                color: white;
+                flex: 1;
+                font-family: Verdana, Geneva, Tahoma, sans-serif;
+                font-size: 15px;
+                align-content: center;
+                justify-content: center;  
+            }
+            .middle-section-adv {
+                display: flex;
+                color: white;
+                flex: 1;
+                padding: 15px;
+                font-family: Verdana, Geneva, Tahoma, sans-serif;
+                align-content: center;
+                justify-content: center;
+            }
+            .post-section {
+                background-color: rgb(172, 9, 9);
+                flex-direction: column;
+                padding: 10px;
+                align-content: center;
+                justify-content: center;
+            }
+            .about-{
+                font-size: 15px;
+            }
+            .btn2 {
+                background-color: rgb(32, 32, 32);
+                outline-width: 0;
+                border-width: 0;
+                border-radius: 0;
+                width: 150px;
+                height: 50px;
+                font-size: 25px;
+                color: white;
+                font-family: Verdana, Geneva, Tahoma, sans-serif;
+            }
+            .btn2:hover {
+                animation-name: ani2;
+                animation-duration: 0.5s;
+                animation-fill-mode: forwards;
+            }
+            @keyframes ani2 {
+                100% {background-color: rgb(172, 9, 9)}
+            }
+            .__post {
+                font-size: 15px;
+                background-color: rgb(32, 32, 32);
+                color: white;
+                padding: 20px;
+            }
+            .tag {
+                font-size: 10px;
+                color: white;
+            }
+        </style>
+        <script>
+            function logout() {
+                window.location.replace("/logout");
+            }
+            function home() {
+                window.location.replace("/home");
+            }
+            function discover() {
+                window.location.replace("/discover");
+            }
+            function post() {
+                var xml = new XMLHttpRequest();
+                xml.open("POST", "/api/post");
+                var data = new FormData();
+                data.append("text", document.getElementById("text-post").value);
+                xml.withCredentials = true;
+                xml.send(data);
+                xml.onload = function() {
+                    window.location.reload();
+                }
+            }
+        </script>
+    </head>
+    <body class="background-adv">
+        <div class="btns">
+            <button onclick="home()"class="btn1">Home</button>
+            <button onclick="discover()"class="btn1">Discover</button>
+            <button onclick="logout()" class="btn1">Logout</button>
+        </div>
+        <div class="top-bar-adv">
+            <h1>RedSide</h1>
+        </div>
+        <div class="middle-section-adv">
+            <div class="post-section">
+                <h1>@{{ content['username'] }}</h1>
+                <p>Followers: {{ content['followers_count'] }} - Following: {{ content['following_count'] }}</p>
+                <p class="about-">Descriptions are currently disabled during this time.</p>
+                <hr>
+                <h1>Post</h1>
+                <textarea class="inp1" id="text-post" cols="35" rows="8" placeholder="Make a post here!"></textarea>
+                <hr>
+                <button onclick="post()" class="btn2">Post</button>
+                <hr>
+                <h1>Posts</h1>
+                {% for _ in content['posts'] %}
+                    <div class="__post">
+                        <p style="width: 550px; height: 50px;">{{ _ }}</p>
+                        <p class="tag">(Posted by {{ content['username'] }})</p>
+                    </div>
+                    <hr>
+                {% endfor %}
+                
+            </div>
+        </div>
+    </body>
+</html>

@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Profile - {{ content['username'] }}</title>
+        <style>
+            .background-adv {
+                background-color: rgb(37, 37, 37);
+            }
+            .top-bar-adv {
+                background-color: rgb(172, 9, 9);
+                display: flex;
+                color: white;
+                flex: 1;
+                padding: 20px;
+                font-family: Verdana, Geneva, Tahoma, sans-serif;
+                font-size: 50px;
+                align-content: center;
+                justify-content: center;
+            }
+
+            .hr {
+                border-radius: 5px;
+                border-width: 1.5px;
+                outline-width: 0;
+                outline-style: none;
+                border-color: rgb(32, 32, 32);
+                background-color: rgb(32, 32, 32);
+            }
+            .btn1 {
+                background-color: rgb(32, 32, 32);
+                outline-width: 0;
+                border-width: 0;
+                border-radius: 0;
+                width: 150px;
+                height: 50px;
+                font-size: 25px;
+                color: white;
+                font-family: Verdana, Geneva, Tahoma, sans-serif;
+            }
+            .btn1:hover {
+                animation-name: ani1;
+                animation-duration: 0.5s;
+                animation-fill-mode: forwards;
+            }
+            @keyframes ani1 {
+                100% {background-color: rgb(172, 9, 9);}
+            }
+            @keyframes ani2 {
+                100% {background-color: rgb(32, 32, 32);}
+            }
+            .inp1 {
+                background-color: rgb(255, 255, 255);
+                color: rgb(172, 9, 9);
+                font-family: Verdana, Geneva, Tahoma, sans-serif;
+                font-size: 16px;
+                outline-width: 0;
+                border-radius: 0;
+                border-width: 0;
+            }
+            .label1 {
+                display: flex;
+                color: white;
+                flex: 1;
+                font-family: Verdana, Geneva, Tahoma, sans-serif;
+                font-size: 15px;
+                align-content: center;
+                justify-content: center;  
+            }
+            .middle-section-adv {
+                display: flex;
+                color: white;
+                flex: 1;
+                padding: 15px;
+                font-family: Verdana, Geneva, Tahoma, sans-serif;
+                align-content: center;
+                justify-content: center;
+            }
+            .post-section {
+                background-color: rgb(172, 9, 9);
+                flex-direction: column;
+                padding: 10px;
+                align-content: center;
+                justify-content: center;
+            }
+            .about-{
+                font-size: 15px;
+            }
+            .btn2 {
+                background-color: rgb(172, 9, 9);
+                outline-width: 0;
+                border-width: 0;
+                border-radius: 0;
+                width: 150px;
+                height: 50px;
+                font-size: 25px;
+                color: white;
+                font-family: Verdana, Geneva, Tahoma, sans-serif;
+            }
+            .btn2:hover {
+                animation-name: ani2;
+                animation-duration: 0.5s;
+                animation-fill-mode: forwards;
+            }
+            .__post {
+                font-size: 15px;
+                background-color: rgb(32, 32, 32);
+                color: white;
+                padding: 20px;
+                flex:0;
+            }
+            .tag {
+                font-size: 10px;
+                color: white;
+            }
+        </style>
+        <script>
+            function on_load() {
+                var xml = new XMLHttpRequest();
+                xml.open("GET", "/api/" + document.URL.split("/")[4] + "/following");
+                xml.send();
+                xml.onload = function () {
+                    if (xml.response == "yes") {
+                        document.getElementById("follow-btn").remove();
+                    }
+                }
+            }
+            on_load()
+            function logout() {
+                window.location.replace("/logout");
+            }
+        </script>
+        <script>
+            function logout() {
+                window.location.replace("/logout");
+            }
+            function home() {
+                window.location.replace("/home");
+            }
+            function discover() {
+                window.location.replace("/discover");
+            }
+            function follow() {
+                var username1 = document.URL.split("/")[4]
+                var xml = new XMLHttpRequest();
+                xml.open("PATCH", "/api/" + username1 + "/follow");
+                xml.withCredentials = true;
+                xml.send();
+                xml.onload = function () {
+                    window.location.reload();
+                }
+            }
+        </script>
+    </head>
+    <body class="background-adv">
+        <button onclick="home()"class="btn2">Home</button>
+        <button onclick="discover()"class="btn2">Discover</button>
+        <button onclick="logout()" class="btn2">Logout</button>
+        <div class="top-bar-adv">
+            <h1>RedSide</h1>
+        </div>
+        <div class="middle-section-adv">
+            <div class="post-section">
+                <h1 id="username-">@{{ content['username'] }}</h1>
+                <p>Followers: {{ content['followers_count'] }} - Following: {{ content['following_count'] }}</p>
+                <p class="about-">Descriptions are currently disabled during this time.</p>
+                <button onclick="follow()" id="follow-btn" class="btn1">Follow</button>
+                <hr>
+                <h1>Posts</h1>
+                {% for _ in content['posts'] %}
+                    <div class="__post">
+                        <p style="width: 550px; height: 50px;">{{ _ }}</p>
+                        <p class="tag">(Posted by {{ content['username'] }})</p>
+                    </div>
+                    <hr>
+                {% endfor %}
+            </div>
+        </div>
+    </body>
+    
+</html>

@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Index</title>
+        <style>
+            .background-adv {
+                background-color: rgb(37, 37, 37);
+            }
+            .top-bar-adv {
+                background-color: rgb(172, 9, 9);
+                display: flex;
+                color: white;
+                flex: 1;
+                padding: 20px;
+                font-family: Verdana, Geneva, Tahoma, sans-serif;
+                font-size: 50px;
+                align-content: center;
+                justify-content: center;
+            }
+            .middle-bar-adv {
+                display: flex;
+                color: white;
+                flex: 1;
+                padding: 20px;
+                font-family: Verdana, Geneva, Tahoma, sans-serif;
+                font-size: 12px;
+                align-content: center;
+                justify-content: center;  
+            }
+            .top-bar-adv:hover {
+                animation-name: hover-1;
+                animation-fill-mode: forwards;
+                animation-duration: 0.5s;
+            }
+
+            .hr {
+                border-radius: 5px;
+                border-width: 1.5px;
+                outline-width: 0;
+                outline-style: none;
+                border-color: rgb(172, 9, 9);
+                background-color: rgb(172, 9, 9);
+            }
+            .bottom-part-adv {
+                display: flex;
+                color: white;
+                flex: 1;
+                padding: 20px;
+                font-family: Verdana, Geneva, Tahoma, sans-serif;
+                font-size: 15px;
+                align-content: center;
+                justify-content: center;  
+            }
+            .btn1 {
+                background-color: rgb(172, 9, 9);
+                outline-width: 0;
+                border-width: 0;
+                border-radius: 0;
+                width: 140px;
+                height: 50px;
+                font-size: 25px;
+                color: white;
+                font-family: Verdana, Geneva, Tahoma, sans-serif;
+            }
+            .btn1:hover {
+                animation-name: ani1;
+                animation-duration: 0.5s;
+                animation-fill-mode: forwards;
+            }
+            @keyframes ani1 {
+                100% {background-color: rgb(37, 37, 37);}
+            }
+        .images {
+            display: flex;
+            align-content: center;
+            justify-content: center;
+        }
+        </style>
+        <script>
+            function login() {
+                window.location.replace("/login")
+            }
+            function join() {
+                window.location.replace("/join")
+            }
+        </script>
+    </head>
+    <body class="background-adv">
+        <button onclick="login()" class="btn1">Login</button>
+        <button onclick="join()"class="btn1">Join</button>
+        <div class="top-bar-adv">
+            <h1>RedSide</h1>
+        </div>
+        <div class="middle-bar-adv">
+            <h1>Share with an open community and be able to view other great posts!</h1>
+        </div>
+        <div class="images">
+            <img src="https://media.discordapp.net/attachments/848967845176934411/849106165136621578/unknown.png?width=481&height=407" alt="">
+            <img src="https://media.discordapp.net/attachments/848967845176934411/849105970402557972/unknown.png?width=529&height=407" alt="">
+        </div>
+        <p style="color: white; text-align: center; font-family: Verdana, Geneva, Tahoma, sans-serif;">Feel free to advertise and make friends!</p>
+        <div class="images">
+            <img src="https://media.discordapp.net/attachments/848967845176934411/849105750123216957/unknown.png?width=401&height=408" alt="">
+            <img src="https://media.discordapp.net/attachments/848967845176934411/849106165136621578/unknown.png?width=481&height=407" alt="">
+        </div>
+        <p style="color: white; text-align: center; font-family: Verdana, Geneva, Tahoma, sans-serif;">The discover page makes it easy to find posts! Its very easy to get started go ahead and press the join button and signup!</p>
+        <br>
+        <br>
+    </body>
+</html>
