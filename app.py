@@ -180,4 +180,4 @@ def follow_user(user):
 
 
 
-app.run(debug=False, host='0.0.0.0', use_reloader=False)
+app.run(debug=False, host='0.0.0.0')
