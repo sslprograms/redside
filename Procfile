@@ -1,1 +1,1 @@
-web: python app.py $PORT
+heroku config:add PORT=33507
